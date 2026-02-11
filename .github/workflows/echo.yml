@@ -1,15 +1,26 @@
 # .github/workflows/basic.yml
-name: Basic Workflow
+name: Maven Build
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  hello:
+  app_build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print message
-        run: echo "Hello DevOps 🚀"
+      - name: git checkout
+        uses: actions/checkout@v4
+
+      - name: setup jdk
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          
+      - name: mvn install
+        run: apt install maven
+
+      - name: mvn build
+        run: mvn clean package
