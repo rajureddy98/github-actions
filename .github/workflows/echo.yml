@@ -20,7 +20,7 @@ jobs:
           java-version: 17
           
       - name: mvn install
-        run: apt install maven
+        run: sudo apt install maven
 
       - name: mvn build
         run: mvn clean package
